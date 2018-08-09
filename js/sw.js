@@ -48,13 +48,13 @@ self.addEventListener('fetch', e => {
     .then(function(cache) {
       return cache.match(e.request)
       .then(function(response) {
-        return response || fetch(event.request)
+        return response || fetch(e.request)
         .then(function(response) {
           cache.put(e.request, response.clone());
           return response;
         });
       });
     })
-    .catch(err => console.log(err, event.request))
+    .catch(err => console.log(err, e.request))
   );
 });
